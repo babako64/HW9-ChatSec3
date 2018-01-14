@@ -1,4 +1,5 @@
 package server;
+
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -10,6 +11,11 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author babak
+ *
+ */
 public class ServerWorker extends Thread {
 
 	private final Socket clientsocket;
@@ -22,10 +28,17 @@ public class ServerWorker extends Thread {
 		this.clientsocket = clientsocket;
 	}
 
+	/**
+	 * get login name
+	 * @return
+	 */
 	public String getLogin() {
 		return login;
 	}
 
+	/**
+	 * run thread to handel client socket
+	 */
 	@Override
 	public void run() {
 		try {
@@ -36,6 +49,10 @@ public class ServerWorker extends Thread {
 		}
 	}
 
+	/**
+	 * receive command from socket input and handel command
+	 * @throws IOException
+	 */
 	private void handelClientSocket() throws IOException {
 		InputStream inputStream = clientsocket.getInputStream();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -60,35 +77,43 @@ public class ServerWorker extends Thread {
 		}
 		clientsocket.close();
 	}
-
+	
+	/**
+	 * send logins list to output
+	 * @throws IOException
+	 */
 	private void handelListLogin() throws IOException {
 
 		ArrayList<ServerWorker> workerList = server.getWorkerList();
 		String msg2 = null;
-		msg2 = Integer.toString(workerList.size()-1);
+		msg2 = Integer.toString(workerList.size() - 1);
 		for (ServerWorker worker : workerList) {
 			if (worker.getLogin() != null) {
 				if (!login.equals(worker.getLogin())) {
 					msg2 += " " + worker.getLogin();
 				}
 			}
-				msg2+="\n";
-				//send(msg2);
+			msg2 += "\n";
+			// send(msg2);
 		}
 		outputStream.write(msg2.getBytes());
 	}
-
+	
+	/**
+	 * send message to target
+	 * @param token
+	 * @throws IOException
+	 */
 	private void handleMessage(String[] token) throws IOException {
 		String sendTo = token[1];
-		
+
 		// String body = token[2];
 		String body = "";
 		for (int i = 2; i < token.length; i++) {
 			body += token[i] + " ";
 			System.out.println(body);
 		}
-		
-		
+
 		List<ServerWorker> workerList = server.getWorkerList();
 
 		for (ServerWorker worker : workerList) {
@@ -99,6 +124,12 @@ public class ServerWorker extends Thread {
 		}
 	}
 
+	/**
+	 * check for login
+	 * @param outputStream
+	 * @param token
+	 * @throws IOException
+	 */
 	private void handelLogin(OutputStream outputStream, String[] token) throws IOException {
 		if (token.length == 3) {
 			String login = token[1];
@@ -137,6 +168,11 @@ public class ServerWorker extends Thread {
 
 	}
 
+	/**
+	 * send data to output
+	 * @param onlineMSG
+	 * @throws IOException
+	 */
 	private void send(String onlineMSG) throws IOException {
 
 		if (login != null) {

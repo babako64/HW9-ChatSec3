@@ -3,6 +3,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author babak
+ *
+ */
 public class Server extends Thread{
 
 	private final int serverPort;
@@ -16,6 +21,9 @@ public class Server extends Thread{
 		return workerList;
 	}
 	
+	/**
+	 * accept new client socket and run thread
+	 */
 	@Override
 	public void run() {
 	
@@ -29,10 +37,7 @@ public class Server extends Thread{
 			workerList.add(worker);
 			worker.start();
 			}
-			
-			
-			
-			
+
 		}catch (Exception e) {
 			// TODO: handle exception
 		}

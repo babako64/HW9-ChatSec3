@@ -4,9 +4,6 @@ import java.io.IOException;
 import GUI.Login;
 
 public class ChatMain {
-
-	
-	//public Resorce resorce;
 	
 public static void main(String[] args) throws IOException {
 		
@@ -14,7 +11,11 @@ public static void main(String[] args) throws IOException {
 		Login login = new Login(main);
 		//main.start();
 	}
-
+	/**
+	 * input data connect to server
+	 * @param res
+	 * @throws IOException
+	 */
 	public void start(Resorce res) throws IOException {
 		
 		System.out.println(res.ip);
