@@ -25,34 +25,11 @@ public class ListPanel extends JFrame implements UserLoginListener{
 	       listModel = new DefaultListModel<>();
 	        
 	        client.addOnlineUser(this);
-	        
-//	        String[] list = client.getOnlinelist();
-//	        for(int i=1;i<list.length;i++) {
-//	        	listModel.addElement(list[i]);
-//	        }
-	        JButton refresh = new JButton("Refresh");
-	        refresh.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					
-					String[] list;
-					try {
-						list = client.getOnlinelist();
-						for(int i=1;i<list.length;i++) {
-				        	listModel.addElement(list[i]);
-				        }
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-			        
-				}
-			});
+	      
 	        //create the list
 	        onlineList = new JList<>(listModel);
 	        add(onlineList,BorderLayout.CENTER);
-	        add(refresh,BorderLayout.SOUTH);
+	       
 	        MouseListener mouseListener = new MouseAdapter() {
 	            public void mouseClicked(MouseEvent mouseEvent) {
 	              JList theList = (JList) mouseEvent.getSource();
