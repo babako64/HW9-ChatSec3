@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -21,23 +22,37 @@ public class Login extends JFrame{
 		this.main = main;
 		
 		 frame = new JFrame("");
-		
+		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		 
 		JTextField ip,port,userName;
 		JPasswordField tPass;
 		JButton login = new JButton("login");
+		
+		JLabel ipLable = new JLabel("Ip");
+		JLabel portLable = new JLabel("Port");
+		JLabel userNameLable = new JLabel("User Name");
+		JLabel passLable = new JLabel("Password");
+		
+		
 		
 		ip=new JTextField();
 		port=new JTextField();
 		userName=new JTextField();
 		
-		ip.setBounds(100,100, 200,30);
-		port.setBounds(100,150, 200,30); 
-		userName.setBounds(100,200, 200,30);
+		ip.setBounds(150,100, 200,30);
+		ipLable.setBounds(50,100, 100, 30);
+		
+		port.setBounds(150,150, 200,30); 
+		portLable.setBounds(50,150, 100, 30);
+		
+		userName.setBounds(150,200, 200,30);
+		userNameLable.setBounds(50,200, 100,30);
 		
 		tPass=new JPasswordField();  
-		tPass.setBounds(100,250, 200,30); 
+		tPass.setBounds(150,250, 200,30);
+		passLable.setBounds(50,250, 100,30);
 		
-		login.setBounds(100,300, 200,30); 
+		login.setBounds(150,300, 200,30); 
 		
 		login.addActionListener(new ActionListener() {
 			
@@ -65,6 +80,12 @@ public class Login extends JFrame{
 		frame.add(userName);
 		frame.add(tPass);
 		frame.add(login);
+		
+		frame.add(ipLable);
+		frame.add(portLable);
+		frame.add(userNameLable);
+		frame.add(passLable);
+		
 		frame.setSize(500,500);  
 		frame.setLayout(null);  
 		frame.setVisible(true);  
